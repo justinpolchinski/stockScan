@@ -1,0 +1,12 @@
+import React from "react";
+import "../DeleteBtn/DeleteBtn.css";
+
+// The ...props means, spread all of the passed props onto this element
+// That way we don't have to define them all individually
+const SaveBtn = props => (
+  <span className="btn btn-success" {...props}>
+    Save
+  </span>
+);
+
+export default SaveBtn;
