@@ -11,7 +11,15 @@ export default {
    return axios.get( "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="+search+"&apikey="+ apiKey);
    // return axios.get( "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&outputsize=compact&symbol=" + search + "&interval="+strInt+"&apikey="+ apiKey);
   },
- 
+  individualstock: function (search){
+    console.log("Individual %s", search);
+    return axios.get( "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&outputsize=compact&symbol=" + search + "&interval=5min&apikey="+ apiKey);
+  
+  },
+ getTrump: function (){
+   console.log("axios trump");
+   return axios.get("api/stock/tweets/trump");
+ },
   // Gets all stock
   getallstocks: function(id) {
     console.log("API %s",id);

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const stockController = require("../../controllers/stockController");
-const tweets = require("../../tweets/tweets")
+const tweets = require("../../controllers/tweets");
 
 // Matches with "/api/stock"
 router.route("/")
@@ -16,6 +16,6 @@ router.route('/signup/:userName/:password')
    .put(stockController.update);
 router.route("/delete/:id")
    .put(stockController.remove);
-// router.route("/tweets/trump")
-//   .get(tweets.tweetsUrl);
+router.route("/tweets/trump")
+    .get(tweets.trump);
 module.exports = router;

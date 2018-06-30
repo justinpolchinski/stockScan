@@ -4,7 +4,7 @@ import Stocks from "./pages/Stocks";
 import Nav from "./components/Nav";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
-
+import singleStock from "./pages/singleStock";
 
 const App = () => (
   <Router>
@@ -13,6 +13,7 @@ const App = () => (
       <Route exact path = "/" component={Home}/>
       <Route path="/stocks" component={Stocks}/>
       <Route exact path="/signup" component={Signup}/>
+      <Route path="/individual" component={singleStock}/>
       
     </div>
   </Router>

@@ -4,6 +4,7 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import DeleteBtn from "../../components/DeleteBtn";
 import SaveBtn from "../../components/saveBtn";
+import SingleStockBtn from "../../components/singleBtn";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
@@ -14,13 +15,19 @@ class Stocks extends Component {
     stockRec: [],
     priceHistory:[],
     savedStock:[],
-
     lastPrice:"",
     refreshPrice: "",
     lastRefreshed:"",
-    savedPriceArr:[]
+    savedPriceArr:[],
+   
   };
-  
+  componentDidMount() {
+    console.log("componentsDidMount");
+    this.loadgetallstocks();
+   
+    
+    
+  }
   handleInputChange = (event) =>{
     console.log("Input change");
     const {name,value} = event.target;
@@ -29,76 +36,52 @@ class Stocks extends Component {
     })
    
   }
+singleStockPage=(event)=>{
+  const target = event.target.id;
+  sessionStorage.individual=target;
+  console.log("Individual Page");
+  window.location.href = "/individual/"+target;
+}
 
  savedStockArr=()=>{
+  console.log("state savedStock: %O", this.state.savedStock);
  
+  
   let arrayTicker = this.state.savedStock.join();
-  console.log("arrayTicker: "+ arrayTicker);
+  
     API.searchstocks(arrayTicker)
     .then (res =>{
-      
-      
-      console.log(res.data["Meta Data"]);
-      console.log(res.data["Stock Quotes"]);
-      
-      let arrayPrice = res.data["Stock Quotes"];
-      console.log("arrayPrice %O",array);
-      let array =[];
-      for (let i =0; i<arrayPrice.length; i++){
-        array.push(array[i]["2. price"]);
-        console.log("Array %O",array);
-        
-      }
-      // let lastR = "3. Last Refreshed";
-      // let lastRefreshed = (res.data["Meta Data"][lastR]);
-      // let lastPrice = res.data["Time Series ("+interval+"min)"][lastRefreshed]["4. close"];
-      // console.log("Saved last Price: %s",lastPrice);
-      
-      //this.setState({savedPriceArr:arrayPrice});
-      console.log("arrayPrice %O",arrayPrice)
+      if (res.data!==undefined && !res.data["Information"]){
+        console.log(res.data["Stock Quotes"]);
+      //let arrayPrice = res.data["Stock Quotes"];
+      this.setState({savedPriceArr: res.data["Stock Quotes"]})
+     // this.state.savedPriceArr= res.data["Stock Quotes"];
+      console.log("savedPriceArr %O",this.state.savedPriceArr);
 
+      }
+  
     })
- 
+    
  }
 
  
   search4Stocks = (search) =>{
-    let stockArr = this.state.stockRec;
-    let key;
-    let priceHist =[];
     console.log("Searching for Stocks:");
     API.searchstocks(search)
       .then(res =>  {
-
+        if(res.data["Information"]){
+          alert("Please Try again server is busy!");
+          // {Information: "Please consider optimizing your API call frequency."}
+        }
+        
         console.log("Searching for Stocks:");
-        console.log(res.data["Meta Data"]);
-        console.log(res.data["Stock Quotes"][0]["2. price"]);
-        console.log(res.data["Stock Quotes"]);
-      //   let lastRefreshed = (res.data["Meta Data"]["3. Last Refreshed"]);
+        console.log(res.data);
+       
+        console.log(res.data["Stock Quotes"].length);
+        this.setState({stockRec:res.data["Stock Quotes"]})
+        //this.state.stockRec = res.data["Stock Quotes"];
+        console.log("stockRec %O", this.state.stockRec);
         
-      //   console.log(res.data["Time Series ("+interval+"min)"]);
-      //   let stockSymbol = res.data["Meta Data"]["2. Symbol"];
-      //   let timeSeries = res.data["Time Series ("+interval+"min)"];
-      //   let lastPrice = res.data["Time Series ("+interval+"min)"][lastRefreshed]["4. close"];
-      //   for (key in timeSeries){ 
-      //    // console.log("This is key: "+key);
-      //     priceHist.push(timeSeries[key]["4. close"]);
-      //  };
-        
-      //   console.log(lastPrice);
-      //   let stockO = {
-      //     stockSymbol : stockSymbol,
-      //     lastPrice: lastPrice,
-      //     priceHistory: priceHist
-
-      //   };
-        
-      //   stockArr.unshift(stockO);
-      //   this.setState({stockRec: stockArr })
-      //   console.log("stockArr: %O", stockArr);
-      //   console.log("StockRec: %O" , this.state.stockRec);
-        
-    
         
       })
       .catch(err=> console.log("search4Stocks: " +err));
@@ -108,29 +91,45 @@ class Stocks extends Component {
   handleFormSubmit = event =>{
     event.preventDefault();
     console.log("handle form in book.js");
-    this.search4Stocks(this.state.search, this.state.interval);
+    this.search4Stocks(this.state.search);
   }
-  componentDidMount() {
-    this.loadgetallstocks();
-    console.log(this.state.savedStock);
-  }
+  
   savestock = (event) =>{
     const target = event.target.id;
     const id = sessionStorage.id;
-    console.log("target: ");
+    
+    console.log("above if in savestock: %O",this.state.savedPriceArr);
+    if(this.state.savedPriceArr!==[] && this.state.savedPriceArr !==undefined){
+      for(let i = 0; i<this.state.savedPriceArr.length;i++){
+      if(this.state.savedPriceArr[i]["1. symbol"]===this.state.stockRec[target]["1. symbol"]){
+        
+       // alert(this.state.savedPriceArr[i]["1. symbol"]+" "+this.state.stockRec[target]["1. symbol"])
+       
+      alert("already in database");
+      return;
+     
+      
+      }
+      else{
+        alert(this.state.savedPriceArr[i]["1. symbol"]+" "+this.state.stockRec[target]["1. symbol"])
+      }  
+    }
+    
+   }
     console.log(target);
     const contents = {
-      Symbol: this.state.stockRec[target].stockSymbol,
+      Symbol: this.state.stockRec[target]["1. symbol"],
     }
     API.savestock(contents,id)
       //.then(res => this.loadBooks())
-      .then(res => console.log(res))
+      .then(res => console.log("savedstock: %O",res))
       .catch(err => console.log(err));
-    this.loadgetallstocks();
+      this.loadgetallstocks();
+    
   }
 
   deleteStocks = (event) =>{
-    const ticker = event.target.id.toLowerCase();
+    const ticker = event.target.id;
     console.log("Ticker deleted %s", ticker);
     let arr = this.state.savedStock;
     let array = arr.filter(words => words !== ticker);
@@ -151,13 +150,13 @@ class Stocks extends Component {
       .then(res => {
         console.log("res.data: %O", res.data);
         this.setState({ savedStock: res.data.Symbol })
-        
-        console.log(this.state.savedStock);
+        this.savedStockArr();
+        console.log("db: %O",this.state.savedStock);
       })
         
       .catch(err => console.log(err));
   };
-
+  
   render() {
     return (
       <Container fluid>
@@ -168,14 +167,14 @@ class Stocks extends Component {
             </Jumbotron>
             <form>
               <Input name="search" placeholder="Ticker Search"onChange={this.handleInputChange} />
-              <Input name="interval" placeholder="Enter minute interval 1, 5, 15"onChange={this.handleInputChange}/>
+              
               <FormBtn
               onClick={this.handleFormSubmit}
               >Submit</FormBtn>
             </form>
           </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
+         <Col size="md-6 sm-12">
+          <Jumbotron>
               <h1>Tickers Searched</h1>
             </Jumbotron>
             {this.state.stockRec.length ? (
@@ -185,12 +184,12 @@ class Stocks extends Component {
 
                     {/* <a href={stock}> */}
                       <strong>
-                        {stock.stockSymbol.toUpperCase()}
+                        {stock["1. symbol"].toUpperCase()}
                         <br /> 
                         
                         
                         {/* <div name={stock.stockSymbol} data-refresh ={setInterval(this.stockRefresh(stock.stockSymbol),1000)}> Price: {this.state.refreshPrice}</div> */}
-                        <div name={stock.stockSymbol} > Price: {stock.lastPrice} </div>
+                        <div name={stock["1. symbol"]} > Price: {stock["2. price"]} </div>
                       </strong>
                     {/* </a> */}
                     <br />
@@ -205,27 +204,29 @@ class Stocks extends Component {
               <h3>No Results to Display</h3>
             )}
           </Col>
-
+          {/* {this.savedStockArr()} */}
           <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>My Saved Stocks</h1>
             </Jumbotron>
-            {this.savedStockArr()}
-            {this.state.savedStock.length ? (
+            {/* {this.state.savedStock.length>2 ? ( */}
+            {this.state.savedPriceArr!==undefined && !this.state.savedPriceArr["Information"] && this.state.savedPriceArr!==[]?(
+            
               <List>
-                {this.state.savedStock.map((stocks, index) => (
-                  <ListItem id={stocks._id}  key={index}>
+                {this.state.savedPriceArr.map((stocks, index) => (
+                  <ListItem  key={index}>
 
                     
                       <strong>
                         {stocks.Symbol}
                         {/* {this.savedStockArr(stocks)} */}
-                        <br /> <div name={stocks[index]}>Ticker: {stocks.toUpperCase()}<br/>Price: </div>
+                        <br /> <div name={stocks["1. symbol"]}>Ticker: {stocks["1. symbol"].toUpperCase()}<br/>Price: {stocks["2. price"]}</div>
                         {/* {this.state.savedPriceArr[index]} */}
                       </strong>
                     
                     <br />
-                    <DeleteBtn id={stocks} onClick={this.deleteStocks}/>
+                    <SingleStockBtn id={stocks["1. symbol"].toLowerCase()} onClick={this.singleStockPage}/>
+                    <DeleteBtn id={stocks["1. symbol"]} onClick={this.deleteStocks}/>
                   </ListItem>
                 ))}
               </List>
@@ -234,7 +235,9 @@ class Stocks extends Component {
             )}
           </Col>
         </Row>
+        
       </Container>
+      
     );
   }
 }

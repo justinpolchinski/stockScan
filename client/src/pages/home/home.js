@@ -3,8 +3,6 @@ import  { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-// import DeleteBtn from "../../components/DeleteBtn";
-// import SaveBtn from "../../components/saveBtn";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
@@ -13,10 +11,14 @@ import { Input, FormBtn } from "../../components/Form";
 class Home extends Component{
     state = {
         userName: "",
-        password: ""
+        password: "",
+        trumpText: [],
+        x:0
 
     }
-   
+   componentDidMount(){
+     this.trumpInput();
+   }
     handleInputChange = (event) =>{
         console.log("Input change");
         const {name,value} = event.target;
@@ -24,7 +26,28 @@ class Home extends Component{
           [name]:value
         })
         console.log(this.state);
-    }  
+    } 
+    xIncr=()=>{
+      if(this.state.x<=6){
+      this.setState({x:this.state.x+1});
+      console.log(this.state.x);
+      }
+    }
+    trumpInput = ()=>{
+      
+    
+      API.getTrump()
+      .then (res =>{
+        console.log("Trump");
+        console.log(res.data);
+        
+        this.setState({trumpText:res.data}, function(){
+          return;
+        });
+        console.log("Trump Tweets: %O",this.state.trumpText);
+       
+      })
+    } 
     handleFormSubmit = event =>{
         event.preventDefault();
         const content ={
@@ -43,7 +66,7 @@ class Home extends Component{
             }
         })
         .catch(err => console.log(err));
-        
+    
       };  
     render() {
         return (
@@ -82,6 +105,20 @@ class Home extends Component{
       <Col size="md-6 sm-12">
         <Jumbotron>
           <h1>Trump Alert!!</h1>
+          {/* {this.xIncr()} */}
+          {/* {this.state.x <5?( */}
+            {/* this.trumpInput()):( */}
+            <ul>
+              {this.state.trumpText.map((text,index)=>(
+                
+              <li key={"trump"+index}> {text.text} </li>
+              
+             )
+             )}
+            <br />
+            </ul>
+           {/* )} */}
+          
         </Jumbotron>
         </Col>
         </Row>
