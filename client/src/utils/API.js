@@ -16,6 +16,16 @@ export default {
     return axios.get( "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&outputsize=compact&symbol=" + search + "&interval=5min&apikey="+ apiKey);
   
   },
+  getScrape: function(){
+    let ticker = sessionStorage.individual;
+    console.log("api zacks ticker: "+ticker);
+    return axios.get("/api/stock/scrape/"+ticker);
+  },
+  scrapeZacks:function(){
+    let ticker = sessionStorage.individual;
+    console.log("api scraping ticker: "+ticker);
+    return axios.get("/api/stock/zack/"+ticker);
+  },
  getTrump: function (){
    console.log("axios trump");
    return axios.get("api/stock/tweets/trump");
@@ -25,7 +35,7 @@ export default {
     console.log("API %s",id);
     return axios.get("/api/stock/" +id);
   },
-  // Gets the stock with the given id
+  
   
  
   // // Deletes the stock with the given id

@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
 import singleStock from "./pages/singleStock";
+//import LineExample from "./components/chart/chart.js";
 
 const App = () => (
   <Router>
@@ -14,6 +15,7 @@ const App = () => (
       <Route path="/stocks" component={Stocks}/>
       <Route exact path="/signup" component={Signup}/>
       <Route path="/individual" component={singleStock}/>
+      
       
     </div>
   </Router>

@@ -7,6 +7,7 @@ var cheerio = require("cheerio");
 var Twit = require("twit");
 var Twitter = require("twitter");
 const app = express();
+var scraping = require("./controllers/pageScrape.js");
 require('dotenv').config();
 const PORT = process.env.PORT || 3001;
 

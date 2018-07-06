@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron";
+
 import API from "../../utils/API";
-// import DeleteBtn from "../../components/DeleteBtn";
-// import SaveBtn from "../../components/saveBtn";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
 
 
@@ -49,7 +46,7 @@ class Home extends Component{
           <h1>Sign Up:</h1>
         <form>
           <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
-          <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange}/>
+          <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange}type="password"/>
           <FormBtn
           onClick={this.handleFormSubmit}
           >Submit</FormBtn>

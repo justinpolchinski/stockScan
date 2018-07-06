@@ -5,7 +5,7 @@ import "../DeleteBtn/DeleteBtn.css";
 // That way we don't have to define them all individually
 const SingleBtn = props => (
   <span className="btn btn-success" {...props}>
-    More Statistics
+    
   </span>
 );
 

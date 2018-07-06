@@ -18,37 +18,5 @@
     <div id="root"></div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-  <script>
-    console.log("index %d",sessionStorage.timeArr.length);
-    console.log("timeStamp %d", sessionStorage.timeStamp.length);
-    arrData = [];
-
-    for (var i = 0; i<sessionStorage.timeArr.length;i++){
-      arrData.push(i);
-      sessionStorage.arrData=arrData;
-    }
-    var ctx = document.getElementById('myChart').getContext('2d');
-     //var ctx = document.getElementById('myChart');
-     //
-     
-     var chart = new Chart(ctx, {
-       // The type of chart we want to create
-       type: 'line',
-   
-       // The data for our dataset
-       data: {
-           //labels: [sessionStorage.timeStamp],
-           labels:[sessionStorage.timeArr],
-           datasets: [{
-               label: "My First dataset",
-               backgroundColor: 'rgb(255, 99, 132)',
-               borderColor: 'rgb(255, 99, 132)',
-               data: [sessionStorage.timeArr],
-           }]
-       },
-   
-       // Configuration options go here
-       options: {}
-   });
-   </script>
+ 
 </html>

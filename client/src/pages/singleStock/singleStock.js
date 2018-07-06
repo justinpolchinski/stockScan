@@ -1,17 +1,27 @@
 import React, { Component } from "react";
-import Chart from 'chart.js';
+// import {Line} from 'react-chartjs-2';
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import { Input, FormBtn } from "../../components/Form";
+import SingleBtn from "../../components/singleBtn";
+import LineExample from "../../components/chart/chart.js";
+import {data} from "../../components/chart/chart.js";
  
 
 class Stocks extends Component {
   state = {
    ticker:sessionStorage.individual,
-
+   yahooData: {},
+  zackData:{},
+  chartData:data,
+  lastPrice: 0
   };
+
+
+chartSet = () =>{
+ // this.setState({chartData: data});
+  console.log("Chart Data: %O",data);
+} 
 getData = () =>{
   const ticker = this.state.ticker;
   API.individualstock(ticker)
@@ -28,50 +38,82 @@ getData = () =>{
       timeStamp.push(key);
       timeArr.push(parseFloat(timeSeries[key]["4. close"]));
     }
+    this.state.lastPrice = timeArr[0];
+    this.state.chartData.labels = timeStamp.reverse();
+    this.state.chartData.datasets[0].data=timeArr.reverse();
+    this.state.chartData.datasets[0].label=sessionStorage.individual.toUpperCase();
     console.log(timeArr);
     sessionStorage.timeStamp = timeStamp;
     sessionStorage.timeArr= timeArr;
     sessionStorage.array = [1,2,3];
-  })
+    
+  });
+  this.chartSet();
+  
 } 
-// chartBuild = () =>{
-//  var ctx = document.getElementById('myChart').getContext('2d');
-//   //var ctx = document.getElementById('myChart');
-//   console.log(ctx);
-//   var chart = new Chart(ctx, {
-//     // The type of chart we want to create
-//     type: 'line',
 
-//     // The data for our dataset
-//     data: {
-//         labels: ["January", "February", "March", "April", "May", "June", "July"],
-//         datasets: [{
-//             label: "My First dataset",
-//             backgroundColor: 'rgb(255, 99, 132)',
-//             borderColor: 'rgb(255, 99, 132)',
-//             data: [0, 10, 5, 2, 20, 30, 45],
-//         }]
-//     },
+scrapeData = () =>{
+  API.getScrape().then(result =>{
+    this.setState({yahooData:result.data})
+    console.log("Yahoo Data %O",this.state.yahooData);
+    
+  });
+}
+zackScrape = () =>{
+  API.scrapeZacks().then(result =>{
+    this.setState({zackData:result.data});
+    console.log("Zack Data %O",this.state.zackData);
+    
+  })
+}
 
-//     // Configuration options go here
-//     options: {}
-// });
-// }
+myStocksPage=(event)=>{
+  
+  console.log("My Stocks List Page");
+  window.location.href = "/stocks/"+sessionStorage.id;
+}
+
+componentDidMount(){
+  this.scrapeData();
+  this.zackScrape();
+  this.getData();
+}
+
   render() {
     return (
+      
       <Container fluid>
+     
         <Row>
           <Col size="md-12">
           <Jumbotron>
             <h1>{sessionStorage.individual.toUpperCase()}</h1>
           </Jumbotron>
-           {this.getData()}
+           {/* {this.getData()} */}
+           
+          </Col>
+        </Row>
+        <SingleBtn onClick={this.myStocksPage}>Go Back</SingleBtn>
+        
+        <Row>
+          <Col size="md-8">
+          <Jumbotron >
+          <h3 className="text-left">Open: ${this.state.zackData.open}</h3>
+           <h3 className="text-left">52 Week High: ${this.state.zackData.Wk52High}</h3>
+           <h3 className="text-left">52 Week Low: ${this.state.zackData.Wk52Low}</h3>
+           <h3 className="text-left">PEG Ratio: {this.state.zackData.pegRatio}</h3>
+           <h3 className="text-left">Beta: {this.state.zackData.Beta}</h3>
+           <h3 className="text-left">Dividend: ${this.state.zackData.dividend}</h3>
+           <h3 className="text-left">Zacks Recommendation is a {this.state.zackData.zackRack}</h3>
+           <h3 className="text-left">The Yahoo 52 Week Target Price: ${this.state.yahooData.yahoo52WeekTarget}</h3>
+           <h3 className="text-left">Estimated Next Earnings: {this.state.yahooData.yahooEarnings}</h3>
+          </Jumbotron>
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
-          {/* {this.chartBuild()} */}
-            <canvas id="myChart"></canvas>
+          <h1>{sessionStorage.individual.toUpperCase()} Current Price: ${this.state.lastPrice}</h1>
+          <LineExample data={this.state.chartData}/>
           </Col>
         </Row>
       </Container>

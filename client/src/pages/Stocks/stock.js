@@ -225,7 +225,7 @@ singleStockPage=(event)=>{
                       </strong>
                     
                     <br />
-                    <SingleStockBtn id={stocks["1. symbol"].toLowerCase()} onClick={this.singleStockPage}/>
+                    <SingleStockBtn id={stocks["1. symbol"].toLowerCase()} onClick={this.singleStockPage}>More Statistics</SingleStockBtn>
                     <DeleteBtn id={stocks["1. symbol"]} onClick={this.deleteStocks}/>
                   </ListItem>
                 ))}
