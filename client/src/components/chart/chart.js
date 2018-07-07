@@ -8,7 +8,10 @@ export const data = {
       label: '',
       fill: false,
       lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
+      //little rectangle
+     // backgroundColor: 'rgba(75,192,192,0.4)',
+      backgroundColor:'black',
+
       borderColor: 'rgba(75,192,192,1)',
       borderCapStyle: 'butt',
       borderDash: [],
