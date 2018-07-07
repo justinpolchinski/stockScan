@@ -51,7 +51,7 @@ class Home extends Component{
             userName: this.state.userName,
             password: this.state.password
         }
-       // console.log(content);
+        console.log(content);
         API.signInUser(content)
         .then(res => {
             console.log("User Info %O", res.data);

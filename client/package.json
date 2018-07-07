@@ -6,7 +6,6 @@
   "dependencies": {
     "axios": "^0.16.2",
     "chart.js": "^2.7.2",
-    "dotenv": "^6.0.0",
     "react": "^16.0.0",
     "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.0.0",
