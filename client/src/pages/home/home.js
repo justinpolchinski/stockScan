@@ -10,12 +10,25 @@ class Home extends Component{
         userName: "",
         password: "",
         trumpText: [],
-        x:0
+        x:0, 
+        investoNews:{}
 
     }
    componentDidMount(){
      this.trumpInput();
+     this.investoScrape();
    }
+   investoScrape = () =>{
+     console.log("investoScrape");
+     API.getInvesto()
+     .then (res =>{
+      console.log("Returning Investopedia");
+      console.log(res.data);
+      this.setState({investoNews:res.data})
+      console.log("InvestoNews: %O",this.state.investoNews);
+     })
+   }
+  
     handleInputChange = (event) =>{
         console.log("Input change");
         const {name,value} = event.target;
@@ -85,11 +98,7 @@ class Home extends Component{
           onClick={this.handleFormSubmit}
           >Submit</FormBtn>
         </form>
-        {/* <button>
-        <a href ="/signup">
-        Sign UP!
-        </a>
-        </button> */}
+      
         <button  className="btn btn-success text-white">
             <a className= "text-white" href ="/signup">
             Sign UP!
@@ -102,9 +111,7 @@ class Home extends Component{
       <Col size="md-6 sm-12">
         <Jumbotron>
           <h1>Trump Alert!!</h1>
-          {/* {this.xIncr()} */}
-          {/* {this.state.x <5?( */}
-            {/* this.trumpInput()):( */}
+        
             <ul>
               {this.state.trumpText.map((text,index)=>(
                 
@@ -114,34 +121,21 @@ class Home extends Component{
              )}
             <br />
             </ul>
-           {/* )} */}
+          
           
         </Jumbotron>
         </Col>
+        {/* ++++++++++++++++++++++++++ */}
+        <Col size="md-6 sm-12">
+        <Jumbotron>
+          {this.state.investoNews.TopNewsCL2}
+          
+          
+        </Jumbotron>
+        </Col>
+        {/* +++++++++++++++++++++++++++++ */}
         </Row>
-        {/* {this.state.stockRec.length ? (
-          <List>
-            {this.state.stockRec.map((stock, index) => (
-              <ListItem index={index}  key={index}>
-
-               
-                  <strong>
-                    {stock.stockSymbol.toUpperCase()}
-                    <br /> 
-                    <div name={stock.stockSymbol} > Price: {this.state.refreshPrice} </div>
-                  </strong>
-               
-                <br />
-                <SaveBtn id={index} onClick={this.savestock}>Save</SaveBtn>
-                
-              </ListItem>
-            ))}
-  
-            
-          </List>
-        ) : (
-          <h3>No Results to Display</h3>
-        )} */}
+      
       
       
       </Container>

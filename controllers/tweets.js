@@ -30,7 +30,7 @@ var tweetsUrl = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_
                tweetsString += tweets[i].text + '\n';
            }
            
-           console.log(tweetsString+"\n");
+          // console.log(tweetsString+"\n");
            res.json( tweets);
            
        }

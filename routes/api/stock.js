@@ -5,7 +5,7 @@ const pageScrape = require("../../controllers/pageScrape");
 
 // Matches with "/api/stock"
 router.route("/")
-  //.get(stockController.findAll)
+  
 router.route('/signup/:userName/:password')
   .post(stockController.create);
   router.route('/signin/:userName/:password')
@@ -22,5 +22,7 @@ router.route("/tweets/trump")
 router.route("/scrape/:ticker")
     .get(pageScrape.scrapingYahoo);
 router.route("/zack/:ticker")
-    .get(pageScrape.scrapingZacks);
+    .get(pageScrape.scrapingZacks)
+router.route("/investo/investo")
+    .get(pageScrape.investopediaScrape);
 module.exports = router;

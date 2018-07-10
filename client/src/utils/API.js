@@ -35,8 +35,11 @@ export default {
     console.log("API %s",id);
     return axios.get("/api/stock/" +id);
   },
-  
-  
+  //Scrape Investopedia
+  getInvesto: function(){
+    console.log("axios getInvesto");
+    return axios.get("/api/stock/investo/investo");
+  },
  
   // // Deletes the stock with the given id
   deletestock: function(id,ticker) {

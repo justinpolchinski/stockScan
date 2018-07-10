@@ -45,31 +45,23 @@ scrapingZacks: function(req,res){
     results = {};
     request("https://www.zacks.com/stock/quote/"+ticker, function (error, response,html){
         var $1 = cheerio.load(html);
-        //var dayStats = $1("#stock_activity").html();
+       
         var dayStats = $1("#stock_activity").text().trim();
-        //var earningsStats = $1("#stock_key_earnings").html();
         var earningsStats = $1("#stock_key_earnings").text().trim();
         var zackRack = $1(".rank_view").html().split(/<span/g)[0].trim();
-    //    $1(".abut_bottom").each((i,element)=>{
-    //       test1 = $1(this).find("a").html();
-    //     console.log(test1);
-    //    });
-    
-       // console.log(earningsStats);
-       console.log(dayStats);
+      // console.log(dayStats);
         var pegRatio = earningsStats.split(/PEG Ratio/g)[1].trim();
         var open = dayStats
         var open = dayStats.toString().trim().split(/Open/g)[1].split(/Day/g)[0].trim();
-        console.log("peg: " + pegRatio);
-        console.log("Open %s", open);
+      //  console.log("peg: " + pegRatio);
+       // console.log("Open %s", open);
        let Wk52Low = dayStats.split(/52 Wk Low/g)[1].split(/52/g)[0].trim();
        let Wk52High = dayStats.split(/52 Wk High/g)[1].split(/Avg/g)[0].trim();
        let dividend = dayStats.split(/Dividend/g)[1].split(/Beta/g)[0].trim();
        let Beta = dayStats.split(/Beta/g)[1].trim();
-       
-        console.log("Open: %s\n52 Week low: %s\n52 week high: %s\nDividend: %s\nBeta: %s", open, Wk52Low, Wk52High, dividend, Beta);
+        
         console.log("========================================");
-       
+        console.log("Open: %s\n52 Week low: %s\n52 week high: %s\nDividend: %s\nBeta: %s", open, Wk52Low, Wk52High, dividend, Beta);
         console.log("========================================");
         console.log(zackRack); 
 
@@ -84,24 +76,36 @@ scrapingZacks: function(req,res){
             zackRack
         } 
     if (!error) {
-       
-        
-         
         res.send(results);
-       
      }
      else {
          console.log('ERROR: ' + error);
-        
      }
-        
-    
 })
+},
 
+investopediaScrape: function(req,res){
+    investo={};
+    console.log("Controller Scraping Investopedia");
+    request("https://www.investopedia.com/", function (error, response,html){
+        var $2 = cheerio.load(html);
+        var TopNewsCL2 = $2(".cl-2").find("li").html().trim();
+        var cl2href = "https://www.investopedia.com"+ $2(".cl-2").find("li").html().trim().split(/href="/g)[1].split(/"/g)[0];
+        console.log("Largest News Image: " + TopNewsCL2);
+        console.log("cl2href: %s", cl2href);
+        investo ={
+            TopNewsCL2
+        }
+        if (!error) {
+            res.send(investo);
+         }
+         else {
+             console.log('ERROR: ' + error);
+         }
 
-
-
+    })
 }
+
 }
 
 
