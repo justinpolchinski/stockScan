@@ -1,14 +1,16 @@
 import axios from "axios";
 
-const apiKey = process.env.REACT_APP_ALPHA_API_KEY;
+const apiKey = process.env.ALPHA_API_KEY;
 
 export default {
   //Searching Nytimes with their API
   searchstocks: function (search){
     console.log(search);
-   // let strInt = interval + "min";
+   
+   
     console.log("API.js searchStocks")
    return axios.get( "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols="+search+"&apikey="+ apiKey);
+  
    // return axios.get( "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&outputsize=compact&symbol=" + search + "&interval="+strInt+"&apikey="+ apiKey);
   },
   individualstock: function (search){

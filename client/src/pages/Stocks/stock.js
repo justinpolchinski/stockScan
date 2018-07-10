@@ -105,13 +105,13 @@ singleStockPage=(event)=>{
         
        // alert(this.state.savedPriceArr[i]["1. symbol"]+" "+this.state.stockRec[target]["1. symbol"])
        
-      alert("already in database");
+      alert("Already Saved to your database");
       return;
      
       
       }
       else{
-        alert(this.state.savedPriceArr[i]["1. symbol"]+" "+this.state.stockRec[target]["1. symbol"])
+       console.log(this.state.savedPriceArr[i]["1. symbol"]+" "+this.state.stockRec[target]["1. symbol"])
       }  
     }
     
