@@ -1,0 +1,26 @@
+.loginForm{
+    border: 2px solid gray;
+    padding-bottom: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+}
+
+.centerLogo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 10px;
+}
+
+.btn{
+    background-color: gray;
+    border: white;
+}
+
+.loginLabel{
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    font-family: 'Share Tech', sans-serif;
+}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-
+import Label from 'react-bootstrap/lib/Label';
 import API from "../../utils/API";
+import "../home/home.css";
+import logo from "../home/stocklogo.PNG";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
 
@@ -40,10 +42,11 @@ class Home extends Component{
     <Row>
         
             
-        
-        
-        <Col size="md-12 sm 12">
-          <h1>Sign Up:</h1>
+    <Col size="md-6 sm 12">
+   
+    <div className={"col-md-12 loginForm"}>
+        <img src={logo} className={"centerLogo"}></img>
+        <Label className={"loginLabel"}>Sign-Up:</Label>
         <form>
           <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
           <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange}type="password"/>
@@ -55,11 +58,12 @@ class Home extends Component{
             <a className= "text-white" href ="/">
             Login
             </a>
-      </button>
+        </button>
+      </div>
         </Col>
      < br/>
      </Row>
-      </Container>
+    </Container>
     )}
         ////////////////////////component end
 }

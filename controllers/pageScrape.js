@@ -45,6 +45,9 @@ scrapingZacks: function(req,res){
     results = {};
     request("https://www.zacks.com/stock/quote/"+ticker, function (error, response,html){
         var $1 = cheerio.load(html);
+
+        // use something like this to strip style attributes from incoming HTML:
+        //$1.find('*[style]').removeAttr('style');
        
         var dayStats = $1("#stock_activity").text().trim();
         var earningsStats = $1("#stock_key_earnings").text().trim();

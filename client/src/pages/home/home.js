@@ -3,7 +3,10 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
-
+import "./home.css";
+import { List, ListItem } from "../../components/List";
+import logo from "./stocklogo.PNG";
+import Label from 'react-bootstrap/lib/Label';
 
 class Home extends Component{
     state = {
@@ -82,14 +85,30 @@ class Home extends Component{
         return (
     <Container fluid>
     <br/>
+    {/* +++++++++++++++++++++++++++++++++++++++++++ */}
     <Row>
+    <Col size="md-3 sm-12">
+        {/* <div size="md-3 sm 12"> */}
+        <div className={"loginLabel"}>
+        <Label>Trump Alert!</Label>
         
-            
-        <Col size="md-8 sm-12">
-        <h3 className="col-md-8 col-sm-12">Investment Information for all! </h3>
-        </Col>
+        </div>
+        <List>
+              {this.state.trumpText.map((text,index)=>(
+                <ListItem index ={"index"} key={"trump"+index}>
+                  <div> {text.text} </div>
+                </ListItem>
+              ))}
+       
+        </List>
+      </Col>
+        <Col size="md-6 sm 12">
+        <div className={"loginLabel"}>
+          <Label>Login</Label>
         
-        <Col size="md-4 sm 12">
+        </div>
+        <div className={"col-md-12 loginForm"}>
+          <img src={logo} className={"centerLogo"}></img>
           <h1>Login:</h1>
         <form>
           <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
@@ -98,46 +117,32 @@ class Home extends Component{
           onClick={this.handleFormSubmit}
           >Submit</FormBtn>
         </form>
-      
+        
         <button  className="btn btn-success text-white">
             <a className= "text-white" href ="/signup">
-            Sign UP!
+            Sign Up!
             </a>
       </button>
+
+      </div>
         </Col>
+      <div className={"loginLabel"} size="md-6 sm 12">
+
+      </div>  
      < br/>
-     </Row>
-     <Row>
-      <Col size="md-6 sm-12">
-        <Jumbotron>
-          <h1>Trump Alert!!</h1>
-        
-            <ul>
-              {this.state.trumpText.map((text,index)=>(
-                
-              <li key={"trump"+index}> {text.text} </li>
-              
-             )
-             )}
-            <br />
-            </ul>
-          
-          
-        </Jumbotron>
-        </Col>
+    {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
+    <br/>
         {/* ++++++++++++++++++++++++++ */}
-        <Col size="md-6 sm-12">
+        <Col size="md-3 sm-12">
+        <div className={"loginLabel"}>
+        <Label>Latest News</Label>
+        </div>
         <Jumbotron>
           {this.state.investoNews.TopNewsCL2}
-          
-          
         </Jumbotron>
         </Col>
         {/* +++++++++++++++++++++++++++++ */}
         </Row>
-      
-      
-      
       </Container>
     )}
         ////////////////////////component end

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-//import google from "google-finance-data";
-import Jumbotron from "../../components/Jumbotron";
+import "./stock.css";
+
 import API from "../../utils/API";
 import DeleteBtn from "../../components/DeleteBtn";
 import SaveBtn from "../../components/saveBtn";
@@ -8,7 +8,8 @@ import SingleStockBtn from "../../components/singleBtn";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
- 
+import Label from 'react-bootstrap/lib/Label';
+import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
 
 class Stocks extends Component {
   state = {
@@ -19,11 +20,38 @@ class Stocks extends Component {
     refreshPrice: "",
     lastRefreshed:"",
     savedPriceArr:[],
-   
+    date: ""
+  };
+  onChange = () =>{
+  const d = new Date();
+  function hour12(){
+    let hour = d.getHours()
+    if(hour>11){
+      hour=hour-12;
+      return hour;
+    }
+    else {return hour;}
+  }
+  function zero(){
+    let min = d.getMinutes()
+    
+    if (min<10){
+      return "0"+min.toString();
+    }
+    else{
+      return min;
+    }
+  }
+  let moment = (d.getMonth()+1).toString()+"/"+d.getDate()+"/"+d.getFullYear()+" "+hour12()+":"+zero();
+  
+  
+  
+  this.setState({date:moment})
   };
   componentDidMount() {
     console.log("componentsDidMount");
     this.loadgetallstocks();
+    this.onChange();
    
     
     
@@ -160,58 +188,53 @@ singleStockPage=(event)=>{
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>Stock Scan</h1>
-            </Jumbotron>
-            <form>
+      {/* ================================ */}
+      <Row>
+          <Col size="md-3 sm-12">
+          <div className="side">
+            <form className={"stockSearch"}>
               <Input name="search" placeholder="Ticker Search"onChange={this.handleInputChange} />
-              
               <FormBtn
               onClick={this.handleFormSubmit}
               >Submit</FormBtn>
             </form>
-          </Col>
-         <Col size="md-6 sm-12">
-          <Jumbotron>
-              <h1>Tickers Searched</h1>
-            </Jumbotron>
+         <br />
+         <br />   
+         <div classname={"searchRes"}>
             {this.state.stockRec.length ? (
               <List>
                 {this.state.stockRec.map((stock, index) => (
                   <ListItem index={index}  key={index}>
-
-                    {/* <a href={stock}> */}
                       <strong>
-                        {stock["1. symbol"].toUpperCase()}
-                        <br /> 
-                        
-                        
-                        {/* <div name={stock.stockSymbol} data-refresh ={setInterval(this.stockRefresh(stock.stockSymbol),1000)}> Price: {this.state.refreshPrice}</div> */}
-                        <div name={stock["1. symbol"]} > Price: {stock["2. price"]} </div>
+                        {stock["1. symbol"].toUpperCase()} 
+                        <div name={stock["1. symbol"]} > Price: {stock["2. price"]} 
+                        <SaveBtn id={index} onClick={this.savestock}>Save</SaveBtn>
+                        </div>
                       </strong>
-                    {/* </a> */}
-                    <br />
-                    <SaveBtn id={index} onClick={this.savestock}>Save</SaveBtn>
-                    
+                    {/* </a> */}                  
                   </ListItem>
-                ))}
-      
-                
+                ))} 
               </List>
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
+            </div>
+            </div>
+          </Col>  
           {/* {this.savedStockArr()} */}
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>My Saved Stocks</h1>
-            </Jumbotron>
+          <Col size="md-9 sm-12">
+          {/* <div className="date">
+          <DateTimePicker 
+            onChange={this.onChange}
+            value={this.state.date}
+          /> 
+          
+      </div> */}
+      <div className="date">{this.state.date}</div>
+          <div  className={"stockList"}>
+          <Label>MY SAVED STOCKS</Label>
             {/* {this.state.savedStock.length>2 ? ( */}
             {this.state.savedPriceArr!==undefined && !this.state.savedPriceArr["Information"] && this.state.savedPriceArr!==[]?(
-            
               <List>
                 {this.state.savedPriceArr.map((stocks, index) => (
                   <ListItem  key={index}>
@@ -233,8 +256,11 @@ singleStockPage=(event)=>{
             ) : (
               <h3>No Results to Display</h3>
             )}
+            </div>
           </Col>
         </Row>
+      {/* ++++++++++++++++++++++++++++++++++++++++ */}
+       
         
       </Container>
       

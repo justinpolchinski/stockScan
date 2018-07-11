@@ -40,7 +40,7 @@ export default {
   //Scrape Investopedia
   getInvesto: function(){
     console.log("axios getInvesto");
-    return axios.get("/api/stock/investo/investo");
+    return axios.get("/api/stock/investo");
   },
  
   // // Deletes the stock with the given id
