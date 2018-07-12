@@ -6,6 +6,9 @@ import { Col, Row, Container } from "../../components/Grid";
 import SingleBtn from "../../components/singleBtn";
 import LineExample from "../../components/chart/chart.js";
 import {data} from "../../components/chart/chart.js";
+import ReactTooltip from 'react-tooltip';
+import peg from "./pegRatio";
+import theBeta from "./beta";
  
 
 class Stocks extends Component {
@@ -98,11 +101,12 @@ componentDidMount(){
         <Row>
           <Col size="md-8">
           <Jumbotron >
+          <h1>Current Price: ${this.state.lastPrice}</h1>
           <h3 className="text-left">Open: ${this.state.zackData.open}</h3>
            <h3 className="text-left">52 Week High: ${this.state.zackData.Wk52High}</h3>
            <h3 className="text-left">52 Week Low: ${this.state.zackData.Wk52Low}</h3>
-           <h3 className="text-left">PEG Ratio: {this.state.zackData.pegRatio}</h3>
-           <h3 className="text-left">Beta: {this.state.zackData.Beta}</h3>
+           <ReactTooltip/> <h3  data-tip={peg} className="text-left">PEG Ratio: {this.state.zackData.pegRatio}</h3>
+           <h3 data-tip={theBeta}className="text-left">Beta: {this.state.zackData.Beta}</h3>
            <h3 className="text-left">Dividend: ${this.state.zackData.dividend}</h3>
            <h3 className="text-left">Zacks Recommendation is a {this.state.zackData.zackRack}</h3>
            <h3 className="text-left">The Yahoo 52 Week Target Price: ${this.state.yahooData.yahoo52WeekTarget}</h3>
