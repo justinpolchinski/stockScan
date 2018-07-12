@@ -23,8 +23,32 @@
     font-size: 35px;
     color: white;
     font-family: 'Share Tech', sans-serif;
-}
-.investoNews{
+    border-bottom: 2px solid gray;
     
-    color: blue;
+}
+
+.trumpList{
+    border-bottom: 2px solid gray;
+    color: white;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+
+}
+
+.newsList{
+    border-bottom: 2px solid gray;
+    color: white;
+}
+
+a:link {
+    color: white;
+}
+
+a:visited {
+    color: white;
+}
+
+a{
+    color: white;
 }

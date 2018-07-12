@@ -91,16 +91,19 @@ class Home extends Component{
         {/* <div size="md-3 sm 12"> */}
         <div className={"loginLabel"}>
         <Label>Trump Alert!</Label>
-        
         </div>
+        <div>
         <List>
               {this.state.trumpText.map((text,index)=>(
+                <div  className={"trumpList"}>
                 <ListItem index ={"index"} key={"trump"+index}>
                   <div> {text.text} </div>
                 </ListItem>
+                </div>
               ))}
-       
         </List>
+        </div>
+        
       </Col>
         <Col size="md-6 sm 12">
         <div className={"loginLabel"}>
@@ -111,7 +114,7 @@ class Home extends Component{
           <img src={logo} alt=""className={"centerLogo"}></img>
           <h1>Login:</h1>
         <form>
-          <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
+          <Input name="userName" placeholder="Enter Username"onChange={this.handleInputChange} />
           <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange} type="password"/>
           <FormBtn href="/stock"
           onClick={this.handleFormSubmit}
@@ -137,32 +140,59 @@ class Home extends Component{
         <div className={"loginLabel"}>
         <Label>Latest News</Label>
         </div>
-        <div className="border border-primary text-primary investoNews">
-          <p className="border border-primary">
+        <div className={"newsList"}>
+          <ListItem>
+          <p>
             <a href={this.state.investoNews.cl2href}>
             {this.state.investoNews.cl2Title}
             </a><br/>
           </p>
+          </ListItem>
+          </div>
+          <div className={"newsList"}>
+          <ListItem>
           <p>
             <a href={this.state.investoNews.slot2href}>
             {this.state.investoNews.slot2Title}
             </a><br/>
           </p>
+          </ListItem>
+          </div>
+          <div className={"newsList"}>
+          <ListItem>
           <p>
             <a href={this.state.investoNews.slot3href}>
             {this.state.investoNews.slot3Title}
             </a><br/>
           </p>
+          </ListItem>
+          </div>
+          <div className={"newsList"}>
+          <ListItem>
           <p>
             <a href={this.state.investoNews.slot4href}>
             {this.state.investoNews.slot4Title}
             </a><br/>
           </p>
+          </ListItem>
+          </div>
+          <div className={"newsList"}>
+          <ListItem>
           <p>  
             <a href={this.state.investoNews.slot5href}>
             {this.state.investoNews.slot5Title}</a>    
           </p>
-        </div>
+          </ListItem>
+          </div>
+          <div className={"newsList"}>
+          <ListItem>
+          <p>  
+            <a href={this.state.investoNews.slot5href}>
+            {this.state.investoNews.slot6Title}</a>    
+          </p>
+          </ListItem>
+          </div>
+        
         </Col>
         {/* +++++++++++++++++++++++++++++ */}
         </Row>
