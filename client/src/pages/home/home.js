@@ -108,7 +108,7 @@ class Home extends Component{
         
         </div>
         <div className={"col-md-12 loginForm"}>
-          <img src={logo} className={"centerLogo"}></img>
+          <img src={logo} alt=""className={"centerLogo"}></img>
           <h1>Login:</h1>
         <form>
           <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
@@ -137,9 +137,32 @@ class Home extends Component{
         <div className={"loginLabel"}>
         <Label>Latest News</Label>
         </div>
-        <Jumbotron>
-          {this.state.investoNews.TopNewsCL2}
-        </Jumbotron>
+        <div className="border border-primary text-primary investoNews">
+          <p className="border border-primary">
+            <a href={this.state.investoNews.cl2href}>
+            {this.state.investoNews.cl2Title}
+            </a><br/>
+          </p>
+          <p>
+            <a href={this.state.investoNews.slot2href}>
+            {this.state.investoNews.slot2Title}
+            </a><br/>
+          </p>
+          <p>
+            <a href={this.state.investoNews.slot3href}>
+            {this.state.investoNews.slot3Title}
+            </a><br/>
+          </p>
+          <p>
+            <a href={this.state.investoNews.slot4href}>
+            {this.state.investoNews.slot4Title}
+            </a><br/>
+          </p>
+          <p>  
+            <a href={this.state.investoNews.slot5href}>
+            {this.state.investoNews.slot5Title}</a>    
+          </p>
+        </div>
         </Col>
         {/* +++++++++++++++++++++++++++++ */}
         </Row>

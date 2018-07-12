@@ -94,10 +94,40 @@ investopediaScrape: function(req,res){
         var $2 = cheerio.load(html);
         var TopNewsCL2 = $2(".cl-2").find("li").html().trim();
         var cl2href = "https://www.investopedia.com"+ $2(".cl-2").find("li").html().trim().split(/href="/g)[1].split(/"/g)[0];
+        var cl2Title= $2(".cl-2").find(".title").text();
+        var slot2href ="https://www.investopedia.com" + $2("#slot-2").find("a").attr("href");
+        var slot2Title = $2("#slot-2").find(".title").text();
+        var slot3href ="https://www.investopedia.com" + $2("#slot-3").find("a").attr("href");
+        var slot3Title = $2("#slot-3").find(".title").text();
+        var slot4href ="https://www.investopedia.com" + $2("#slot-4").find("a").attr("href");
+        var slot4Title = $2("#slot-4").find(".title").text();
+        var slot5href ="https://www.investopedia.com" + $2("#slot-5").find("a").attr("href");
+        var slot5Title = $2("#slot-5").find(".title").text();
+
         console.log("Largest News Image: " + TopNewsCL2);
         console.log("cl2href: %s", cl2href);
+        console.log("cl2Title: %s\n", cl2Title);
+        console.log("Slot 2href: %s", slot2href);
+        console.log("Slot 2 Title: %s\n", slot2Title);
+        console.log("Slot 3href: %s", slot3href);
+        console.log("Slot 3 Title: %s\n", slot3Title);
+        console.log("Slot 4href: %s", slot4href);
+        console.log("Slot 4 Title: %s\n", slot4Title);
+        console.log("Slot 5href: %s", slot5href);
+        console.log("Slot 5 Title: %s\n", slot5Title);
+        
+        
         investo ={
-            TopNewsCL2
+            cl2href,
+            cl2Title,
+            slot2href,
+            slot2Title,
+            slot3href,
+            slot3Title,
+            slot4href,
+            slot4Title,
+            slot5href,
+            slot5Title
         }
         if (!error) {
             res.send(investo);

@@ -9,7 +9,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, FormBtn } from "../../components/Form";
 import Label from 'react-bootstrap/lib/Label';
-import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
+
 
 class Stocks extends Component {
   state = {

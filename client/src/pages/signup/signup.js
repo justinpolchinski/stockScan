@@ -45,7 +45,7 @@ class Home extends Component{
     <Col size="md-6 sm 12">
    
     <div className={"col-md-12 loginForm"}>
-        <img src={logo} className={"centerLogo"}></img>
+        <img src={logo} alt="" className={"centerLogo"}></img>
         <Label className={"loginLabel"}>Sign-Up:</Label>
         <form>
           <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
