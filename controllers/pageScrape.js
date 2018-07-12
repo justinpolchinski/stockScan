@@ -103,6 +103,8 @@ investopediaScrape: function(req,res){
         var slot4Title = $2("#slot-4").find(".title").text();
         var slot5href ="https://www.investopedia.com" + $2("#slot-5").find("a").attr("href");
         var slot5Title = $2("#slot-5").find(".title").text();
+        var slot6href ="https://www.investopedia.com" + $2("#slot-6").find("a").attr("href");
+        var slot6Title = $2("#slot-6").find(".title").text();
 
         console.log("Largest News Image: " + TopNewsCL2);
         console.log("cl2href: %s", cl2href);
@@ -115,6 +117,8 @@ investopediaScrape: function(req,res){
         console.log("Slot 4 Title: %s\n", slot4Title);
         console.log("Slot 5href: %s", slot5href);
         console.log("Slot 5 Title: %s\n", slot5Title);
+        console.log("Slot 6href: %s", slot6href);
+        console.log("Slot 6 Title: %s\n", slot6Title);
         
         
         investo ={
@@ -127,7 +131,9 @@ investopediaScrape: function(req,res){
             slot4href,
             slot4Title,
             slot5href,
-            slot5Title
+            slot5Title,
+            slot6href,
+            slot6Title
         }
         if (!error) {
             res.send(investo);
