@@ -9,6 +9,7 @@ import {data} from "../../components/chart/chart.js";
 import ReactTooltip from 'react-tooltip';
 import peg from "./pegRatio";
 import theBeta from "./beta";
+import "./singlestock.css";
  
 
 class Stocks extends Component {
@@ -106,15 +107,15 @@ componentDidMount(){
         <SingleBtn onClick={this.myStocksPage}>Go Back</SingleBtn>
         
         <Row>
-          <Col size="md-8">
-          <Jumbotron >
+          <Col size="md-4">
+          <div className="topBox">
           <h1>Current Price: ${this.state.lastPrice}</h1>
               <h3 className="text-left">Open: ${this.state.zackData.open}</h3>
               <h3 className="text-left">52 Week High: ${this.state.zackData.Wk52High}</h3>
               <h3 className="text-left">52 Week Low: ${this.state.zackData.Wk52Low}</h3>
               <h3 className="text-left">Dividend: ${this.state.zackData.dividend}</h3>
               <h3 className="text-left">Estimated Next Earnings: {this.state.yahooData.yahooEarnings}</h3>
-           </Jumbotron>
+           </div>
            <ReactTooltip/> 
            <div className="border border-success">
               <h3  data-tip={peg} className={this.betaPegColor(this.state.zackData.pegRatio)}>PEG Ratio: {this.state.zackData.pegRatio}</h3>
@@ -125,9 +126,8 @@ componentDidMount(){
            </div>
           
           </Col>
-        </Row>
-        <Row>
-          <Col size="md-12">
+
+          <Col size="md-8">
           <h1>{sessionStorage.individual.toUpperCase()} Current Price: ${this.state.lastPrice}</h1>
           <LineExample data={this.state.chartData}/>
           </Col>
