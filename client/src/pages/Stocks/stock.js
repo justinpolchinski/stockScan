@@ -206,8 +206,10 @@ singleStockPage=(event)=>{
                 {this.state.stockRec.map((stock, index) => (
                   <ListItem index={index}  key={index}>
                       <strong>
-                        {stock["1. symbol"].toUpperCase()} 
-                        <div name={stock["1. symbol"]} > Price: {stock["2. price"]} 
+                        <div className="text-white">
+                          {stock["1. symbol"].toUpperCase()}
+                        </div> 
+                        <div name={stock["1. symbol"]} className="text-white"> Price: {stock["2. price"]} 
                         <SaveBtn id={index} onClick={this.savestock} className="saveStock btn">Save</SaveBtn>
                         </div>
                       </strong>

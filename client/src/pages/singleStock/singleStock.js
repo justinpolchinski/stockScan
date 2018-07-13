@@ -108,7 +108,7 @@ componentDidMount(){
         <Row>
           <Col size="md-8">
           <Jumbotron >
-          <h1>Current Price: ${this.state.lastPrice}</h1>
+              <h1>Current Price: ${this.state.lastPrice}</h1>
               <h3 className="text-left">Open: ${this.state.zackData.open}</h3>
               <h3 className="text-left">52 Week High: ${this.state.zackData.Wk52High}</h3>
               <h3 className="text-left">52 Week Low: ${this.state.zackData.Wk52Low}</h3>
