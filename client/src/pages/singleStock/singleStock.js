@@ -60,7 +60,7 @@ betaPegColor = (n) =>{
    let x =n
   if(x<1&&x>0){return "text-success text-left"}
   if (x>=1 && x<=2){ return "text-warning text-left"}
-  else{return "text-primary text-left";}
+  else{return "text-danger text-left";}
 }
 
 scrapeData = () =>{
@@ -110,7 +110,7 @@ componentDidMount(){
           <Col size="md-4">
           <div className="topBox">
           <h1>Current Price: ${this.state.lastPrice}</h1>
-              <h3 className="text-left">Open: ${this.state.zackData.open}</h3>
+              <h3 className="text-left text-primary">Open: ${this.state.zackData.open}</h3>
               <h3 className="text-left">52 Week High: ${this.state.zackData.Wk52High}</h3>
               <h3 className="text-left">52 Week Low: ${this.state.zackData.Wk52Low}</h3>
               <h3 className="text-left">Dividend: ${this.state.zackData.dividend}</h3>
