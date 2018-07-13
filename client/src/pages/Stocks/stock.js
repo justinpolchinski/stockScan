@@ -103,7 +103,7 @@ singleStockPage=(event)=>{
         }
         
         console.log("Searching for Stocks:");
-        console.log(res.data);
+        console.log("searchStocks: %O",res.data);
        
         console.log(res.data["Stock Quotes"].length);
         this.setState({stockRec:res.data["Stock Quotes"]})
@@ -200,7 +200,7 @@ singleStockPage=(event)=>{
             </form>
          <br />
          <br />   
-         <div classname={"searchRes"}>
+         <div className={"searchRes"}>
             {this.state.stockRec.length ? (
               <List>
                 {this.state.stockRec.map((stock, index) => (
