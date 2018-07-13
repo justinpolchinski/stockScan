@@ -208,7 +208,7 @@ singleStockPage=(event)=>{
                       <strong>
                         {stock["1. symbol"].toUpperCase()} 
                         <div name={stock["1. symbol"]} > Price: {stock["2. price"]} 
-                        <SaveBtn id={index} onClick={this.savestock}>Save</SaveBtn>
+                        <SaveBtn id={index} onClick={this.savestock} className="saveStock btn">Save</SaveBtn>
                         </div>
                       </strong>
                     {/* </a> */}                  
@@ -230,6 +230,7 @@ singleStockPage=(event)=>{
           /> 
           
       </div> */}
+      <div className={"lineSep"}>
       <div className="date">{this.state.date}</div>
           <div  className={"stockList"}>
           <Label>MY SAVED STOCKS</Label>
@@ -238,24 +239,21 @@ singleStockPage=(event)=>{
               <List>
                 {this.state.savedPriceArr.map((stocks, index) => (
                   <ListItem  key={index}>
-
-                    
                       <strong>
                         {stocks.Symbol}
                         {/* {this.savedStockArr(stocks)} */}
-                        <br /> <div name={stocks["1. symbol"]}>Ticker: {stocks["1. symbol"].toUpperCase()}<br/>Price: {stocks["2. price"]}</div>
+                        <div name={stocks["1. symbol"]}> <h1 clasName={"stockListData"}>Ticker: {stocks["1. symbol"].toUpperCase()}</h1> <h1 clasName={"stockListData"}>Price: {stocks["2. price"]}</h1></div>
                         {/* {this.state.savedPriceArr[index]} */}
                       </strong>
-                    
-                    <br />
+                      <DeleteBtn id={stocks["1. symbol"]} onClick={this.deleteStocks}/>
                     <SingleStockBtn id={stocks["1. symbol"].toLowerCase()} onClick={this.singleStockPage}>More Statistics</SingleStockBtn>
-                    <DeleteBtn id={stocks["1. symbol"]} onClick={this.deleteStocks}/>
                   </ListItem>
                 ))}
               </List>
             ) : (
               <h3>No Results to Display</h3>
             )}
+            </div>
             </div>
           </Col>
         </Row>

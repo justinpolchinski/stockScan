@@ -4,6 +4,10 @@
     }
 .date{
     color:white;
+    font-family: 'Share Tech', sans-serif;
+    font-size: 75px;
+    margin-bottom: 1%;
+    margin-top: 3%;
 }   
 .stockList {
     text-align: center;
@@ -14,6 +18,7 @@
 
 .list-group-item {
     background-color: transparent;
+    border-bottom: 1px solid gray;
 }
 
 .list-group {
@@ -32,4 +37,22 @@ border: white;
 }
 .body{
     background-color: black;
+}
+
+.saveStock{
+    float: right;
+}
+
+.singleStock{
+    float: right;
+}
+
+h1{
+   float: left;
+   padding-left: 7%;
+   font-size: 22px;
+}
+
+.lineSep{
+
 }
