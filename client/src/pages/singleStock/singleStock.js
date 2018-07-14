@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 // import {Line} from 'react-chartjs-2';
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import SingleBtn from "../../components/singleBtn";
@@ -97,27 +96,24 @@ componentDidMount(){
      
         <Row>
           <Col size="md-12">
-          <Jumbotron>
-            <h1>{sessionStorage.individual.toUpperCase()}</h1>
-          </Jumbotron>
+            <h2 className="stockName">{sessionStorage.individual.toUpperCase()}</h2>
            {/* {this.getData()} */}
-           
+           <div className="goBack"><SingleBtn onClick={this.myStocksPage}>Go Back</SingleBtn></div>
           </Col>
+          
         </Row>
-        <SingleBtn onClick={this.myStocksPage}>Go Back</SingleBtn>
-        
         <Row>
           <Col size="md-4">
           <div className="topBox">
-          <h1>Current Price: ${this.state.lastPrice}</h1>
-              <h3 className="text-left text-primary">Open: ${this.state.zackData.open}</h3>
+              <h3>Current Price: ${this.state.lastPrice}</h3>
+              <h3 className="text-left">Open: ${this.state.zackData.open}</h3>
               <h3 className="text-left">52 Week High: ${this.state.zackData.Wk52High}</h3>
               <h3 className="text-left">52 Week Low: ${this.state.zackData.Wk52Low}</h3>
               <h3 className="text-left">Dividend: ${this.state.zackData.dividend}</h3>
               <h3 className="text-left">Estimated Next Earnings: {this.state.yahooData.yahooEarnings}</h3>
            </div>
            <ReactTooltip/> 
-           <div className="border border-success">
+           <div className="bottomBox">
               <h3  data-tip={peg} className={this.betaPegColor(this.state.zackData.pegRatio)}>PEG Ratio: {this.state.zackData.pegRatio}</h3>
               <h3 data-tip={theBeta} className={this.betaPegColor(this.state.zackData.Beta)}>Beta: {this.state.zackData.Beta}</h3>
               
