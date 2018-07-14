@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 // import {Line} from 'react-chartjs-2';
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import SingleBtn from "../../components/singleBtn";
@@ -60,7 +59,7 @@ betaPegColor = (n) =>{
    let x =n
   if(x<1&&x>0){return "text-success text-left"}
   if (x>=1 && x<=2){ return "text-warning text-left"}
-  else{return "text-primary text-left";}
+  else{return "text-danger text-left";}
 }
 
 scrapeData = () =>{
