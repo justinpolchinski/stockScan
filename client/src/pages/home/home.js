@@ -112,7 +112,6 @@ class Home extends Component{
         </div>
         <div className={"col-md-12 loginForm"}>
           <img src={logo} alt=""className={"centerLogo"}></img>
-          <h1>Login:</h1>
         <form>
           <Input name="userName" placeholder="Enter Username"onChange={this.handleInputChange} />
           <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange} type="password"/>

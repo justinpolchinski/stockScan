@@ -1,3 +1,19 @@
-.topbox {
-    border-bottom: 1px solid gray;    
+.topBox {
+    border-bottom: 1px solid rgba(75,192,192,1);    
+    color: white;
+    padding-top: 10%;
+}
+.goBack{
+    float: right;
+    padding-top: 2%
+}
+.bottomBox{
+    border-bottom: 1px solid rgba(75,192,192,1);
+    padding-top: 10%;
+}
+.stockName{
+    color: white;
+    font-size: 95px;
+    font-family: 'Share Tech', sans-serif;
+    float: left;
 }

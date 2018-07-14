@@ -5,6 +5,7 @@ import "../home/home.css";
 import logo from "../home/stocklogo.PNG";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
+import "./signup.css";
 
 
 class Home extends Component{
@@ -44,7 +45,7 @@ class Home extends Component{
             
     <Col size="md-6 sm 12">
    
-    <div className={"col-md-12 loginForm"}>
+    <div className={"col-md-12 SignupForm"}>
         <img src={logo} alt="" className={"centerLogo"}></img>
         <Label className={"loginLabel"}>Sign-Up:</Label>
         <form>
@@ -63,6 +64,14 @@ class Home extends Component{
         </Col>
      < br/>
      </Row>
+     <Col size="md-8 sm 12">
+     <ul className={"pwordList"}>
+                <li>Password must be 6 characters long</li>
+                <li>Must contain ONE lower-case and ONE upper-case letter</li>
+                <li>Must contain at least ONE number 0-9</li>
+                <li>Must contain at least ONE special character (!, @, #, $, %, &, ^)</li>
+            </ul>
+    </Col>        
     </Container>
     )}
         ////////////////////////component end
