@@ -29,7 +29,10 @@ class Home extends Component{
             password: this.state.password
         }
         API.signUpUser(content)
-        .then(res => {if(res.data==="User Exists"){alert(res.data)}})
+        .then(res => {
+            if(res.data==="User Exists"){alert(res.data)}
+            if(res.data==="Invalid Password Type"){alert(res.data)}
+        })
         .catch(err => console.log(err));
         
       };  
