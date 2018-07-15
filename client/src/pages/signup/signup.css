@@ -1,6 +1,7 @@
 .signupForm{
-    margin-left: 50%;
-    margin-right: 50%;
+    margin: auto;
+    border: 1px solid gray;
+    padding-bottom: 2%;
 }
 
 .pwordList{

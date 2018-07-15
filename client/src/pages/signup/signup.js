@@ -40,12 +40,9 @@ class Home extends Component{
         return (
     <Container fluid>
     <br/>
-    <Row>
-        
-            
+    <Row>        
     <Col size="md-6 sm 12">
-   
-    <div className={"col-md-12 SignupForm"}>
+    <div className={"col-md-12 signupForm border"}>
         <img src={logo} alt="" className={"centerLogo"}></img>
         <Label className={"loginLabel"}>Sign-Up:</Label>
         <form>
