@@ -116,7 +116,6 @@ componentDidMount(){
            <div className="bottomBox">
               <h3  data-tip={peg} className={this.betaPegColor(this.state.zackData.pegRatio)}>PEG Ratio: {this.state.zackData.pegRatio}</h3>
               <h3 data-tip={theBeta} className={this.betaPegColor(this.state.zackData.Beta)}>Beta: {this.state.zackData.Beta}</h3>
-              
               <h3 className="text-left text-white">Zacks Recommendation is a {this.state.zackData.zackRack}</h3>
               <h3 className="text-left text-white">The Yahoo 52 Week Target Price: ${this.state.yahooData.yahoo52WeekTarget}</h3>
            </div>

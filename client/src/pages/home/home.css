@@ -18,6 +18,12 @@
     border: white;
 }
 
+.btn:hover{
+    color: black;
+    background-color: blanchedalmond;
+    border: gray;
+}
+
 .loginLabel{
     text-align: center;
     font-size: 35px;

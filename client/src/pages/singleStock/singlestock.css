@@ -1,7 +1,7 @@
 .topBox {
     border-bottom: 1px solid rgba(75,192,192,1);    
     color: white;
-    padding-top: 10%;
+    padding-top: 6%;
 }
 .goBack{
     float: right;
@@ -9,11 +9,16 @@
 }
 .bottomBox{
     border-bottom: 1px solid rgba(75,192,192,1);
-    padding-top: 10%;
+    padding-top: 6%;
 }
 .stockName{
     color: white;
     font-size: 95px;
     font-family: 'Share Tech', sans-serif;
     float: left;
+}
+
+h3{
+    font-size: 30px;
+    font-family: 'Share Tech', sans-serif;
 }
