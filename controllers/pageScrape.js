@@ -52,13 +52,13 @@ scrapingZacks: function(req,res){
         var dayStats = $1("#stock_activity").text().trim();
         var earningsStats = $1("#stock_key_earnings").text().trim();
         var zackRack = $1(".rank_view").html().split(/<span/g)[0].trim();
-      // console.log(dayStats);
+        //console.log(dayStats);
         var pegRatio = earningsStats.split(/PEG Ratio/g)[1].trim();
         var open = dayStats
         var open = dayStats.toString().trim().split(/Open/g)[1].split(/Day/g)[0].trim();
       //  console.log("peg: " + pegRatio);
        // console.log("Open %s", open);
-       let Wk52Low = dayStats.split(/52 Wk Low/g)[1].split(/52/g)[0].trim();
+       let Wk52Low = dayStats.split(/52 Wk Low/g)[1].split(/52 Wk High/g)[0].trim();
        let Wk52High = dayStats.split(/52 Wk High/g)[1].split(/Avg/g)[0].trim();
        let dividend = dayStats.split(/Dividend/g)[1].split(/Beta/g)[0].trim();
        let Beta = dayStats.split(/Beta/g)[1].trim();

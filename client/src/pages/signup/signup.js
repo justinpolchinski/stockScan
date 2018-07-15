@@ -30,7 +30,10 @@ class Home extends Component{
             password: this.state.password
         }
         API.signUpUser(content)
-        .then(res => {if(res.data==="User Exists"){alert(res.data)}})
+        .then(res => {
+            if(res.data==="User Exists"){alert(res.data)}
+            if(res.data==="Invalid Password Type"){alert(res.data)}
+        })
         .catch(err => console.log(err));
         
       };  
@@ -40,9 +43,12 @@ class Home extends Component{
         return (
     <Container fluid>
     <br/>
-    <Row>        
+    <Row>
+        
+    <Col size= "md-3 sm 0"> </Col>     
     <Col size="md-6 sm 12">
-    <div className={"col-md-12 signupForm border"}>
+   
+    <div className={"col-md-12 SignupForm border pb-3"}>
         <img src={logo} alt="" className={"centerLogo"}></img>
         <Label className={"loginLabel"}>Sign-Up:</Label>
         <form>
@@ -61,7 +67,7 @@ class Home extends Component{
         </Col>
      < br/>
      </Row>
-     <Col size="md-8 sm 12">
+     <Col size="md-9 sm 12">
      <ul className={"pwordList"}>
                 <li>Password must be 6 characters long</li>
                 <li>Must contain ONE lower-case and ONE upper-case letter</li>
