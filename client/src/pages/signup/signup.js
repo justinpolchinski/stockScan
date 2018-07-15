@@ -52,7 +52,7 @@ class Home extends Component{
         <img src={logo} alt="" className={"centerLogo"}></img>
         <Label className={"loginLabel"}>Sign-Up:</Label>
         <form>
-          <Input name="userName" placeholder="enter Username"onChange={this.handleInputChange} />
+          <Input name="userName" placeholder="Enter Username"onChange={this.handleInputChange} />
           <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange}type="password"/>
           <FormBtn
           onClick={this.handleFormSubmit}

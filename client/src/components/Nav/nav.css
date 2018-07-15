@@ -3,6 +3,7 @@
     width: 125px;
 }
 
-.navvy{
+.bg-dark{
     border-bottom-style: solid;
+    background-color: black!important;
 }
