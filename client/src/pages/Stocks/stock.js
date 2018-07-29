@@ -188,7 +188,10 @@ singleStockPage=(event)=>{
     API.getallstocks(id)
       .then(res => {
         console.log("res.data: %O", res.data);
-        this.setState({ savedStock: res.data.Symbol })
+        let userSymbols=res.data.Symbol;
+        userSymbols.sort();
+        console.log("userSymbols: %O",userSymbols);
+        this.setState({ savedStock: userSymbols })
         this.savedStockArr();
         console.log("db: %O",this.state.savedStock);
       })
