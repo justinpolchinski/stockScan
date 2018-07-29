@@ -13,32 +13,13 @@ module.exports = {
     
   },
   findById: function(req, res) {
-    console.log("find by Id");
+    //console.log("find by Id");
     db.Stock
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // create: function(req, res) {
-  //   console.log("controller create hit")
-    
-  //   db.Stock.findOne({userName: req.body.userName, password: req.body.password}, function(err,doc){
-  //     console.log(req.body);
-  //     if(err){console.log(err)}
-  //     if(doc!=null){
-  //       console.log("User Exists");
-  //       return res.send("User Exists");
-  //     }
-  //     else{db.Stock
-  //     .create(req.body)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  //     }
-  //   });
-    
-    
-  // },
-  /////////////////////////////////////////////
+  
   create: function(req, res) {
     console.log("controller create hit")
     

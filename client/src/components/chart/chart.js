@@ -38,15 +38,3 @@ const LineExample = props =>(
 );
 
 export default LineExample;
-// export default React.createClass({
-//   displayName: 'LineExample',
-
-//   render() {
-//     return (
-//       <div>
-//         <h2>Line Example</h2> 
-//         <Line data={data} />
-//       </div>
-//     );
-//   }
-// });

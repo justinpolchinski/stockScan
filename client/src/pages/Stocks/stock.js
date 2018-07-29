@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./stock.css";
-
 import API from "../../utils/API";
 import DeleteBtn from "../../components/DeleteBtn";
 import SaveBtn from "../../components/saveBtn";
@@ -20,7 +19,9 @@ class Stocks extends Component {
     refreshPrice: "",
     lastRefreshed:"",
     savedPriceArr:[],
-    date: ""
+    date: "",
+    companies:{}
+    
   };
   onChange = () =>{
   const d = new Date();
@@ -58,10 +59,17 @@ class Stocks extends Component {
   }
   handleInputChange = (event) =>{
     console.log("Input change");
+    console.log(event.target);
     const {name,value} = event.target;
     this.setState({
       [name]:value
     })
+   
+  }
+  handleInputChangeSelect = (event) =>{
+    console.log("Input change");
+    console.log(event.target.value);
+    this.search4Stocks(event.target.value);
    
   }
 singleStockPage=(event)=>{
@@ -118,7 +126,10 @@ singleStockPage=(event)=>{
 
   handleFormSubmit = event =>{
     event.preventDefault();
-    console.log("handle form in book.js");
+    console.log("Form Submit");
+    
+    console.log(event.target.value);
+   
     this.search4Stocks(this.state.search);
   }
   
@@ -184,20 +195,62 @@ singleStockPage=(event)=>{
         
       .catch(err => console.log(err));
   };
-  
+  CompanyFormSubmit = event =>{
+    event.preventDefault();
+    
+    this.companyCheck(this.state.companyName);
+  }
+
+  companyCheck = () =>{
+    
+    API.getCompany(this.state.companyName)
+    .then(res => {
+      console.log("get Company ticker");
+      console.log("Company: %O", res.data);
+      this.setState({companies:res.data})
+      document.getElementById("companySearch").value="";
+    })
+    
+  }
   render() {
     return (
       <Container fluid>
       {/* ================================ */}
       <Row>
           <Col size="md-3 sm-12">
+
           <div className="side">
-            <form className={"stockSearch"}>
-              <Input name="search" placeholder="Ticker Search"onChange={this.handleInputChange} />
+          <form className={"tickerSearch"}>
+              <h3 className= "text-white">Company Search</h3>
+              <Input name="companyName" id="companySearch" placeholder="Enter Company Name"onChange={this.handleInputChange} />
+              <FormBtn
+              onClick={this.CompanyFormSubmit}
+              >Submit</FormBtn>
+            </form>
+            <br/>
+            {/* ++++++++++++++++++++++++++++ */}
+            {this.state.companies.length ? (
+              
+              <form className="form-group">
+              <br/>
+                <label htmlFor="companySelect"className="text-white">Choose a Company</label>
+                <select id="companySelect" className="form-control form-control-sm" onChange={this.handleInputChangeSelect}>
+                  <option>Choose from list</option>
+                  { this.state.companies.map((company,index)=>(
+                  <option name = "search" value={company.symbol} key={"comp"+index}  className="text-black">{company.securityName}</option>
+                  ))}
+                </select>
+               
+              </form>
+            ):(
+            <form className={"stockSearch"}> 
+              <h3 className="text-white">Ticker Search</h3>
+              <Input name="search" placeholder="Seperate Tickers with comma"onChange={this.handleInputChange} />
               <FormBtn
               onClick={this.handleFormSubmit}
               >Submit</FormBtn>
             </form>
+            )}
          <br />
          <br />   
          <div className={"searchRes"}>
@@ -244,7 +297,7 @@ singleStockPage=(event)=>{
                       <strong>
                         {stocks.Symbol}
                         {/* {this.savedStockArr(stocks)} */}
-                        <div name={stocks["1. symbol"]}> <h1 clasName={"stockListData"}>Ticker: {stocks["1. symbol"].toUpperCase()}</h1> <h1 clasName={"stockListData"}>Price: {stocks["2. price"]}</h1></div>
+                        <div name={stocks["1. symbol"]}> <h1 className={"stockListData"}>Ticker: {stocks["1. symbol"].toUpperCase()}</h1> <h1 className={"stockListData"}>Price: {stocks["2. price"]}</h1></div>
                         {/* {this.state.savedPriceArr[index]} */}
                       </strong>
                       <DeleteBtn id={stocks["1. symbol"]} onClick={this.deleteStocks}/>

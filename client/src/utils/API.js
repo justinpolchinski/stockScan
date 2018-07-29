@@ -3,6 +3,10 @@ import axios from "axios";
 const apiKey = process.env.ALPHA_API_KEY;
 
 export default {
+  getCompany: function(companyName){
+    console.log("Company Name");
+    return axios.get("/api/company/:"+companyName);
+  },
   //Searching Nytimes with their API
   searchstocks: function (search){
     console.log(search);
@@ -66,4 +70,5 @@ export default {
     
     return axios.post("/api/stock/signup/:"+content.userName+"/:"+content.password,content);
   }
+  
 };
