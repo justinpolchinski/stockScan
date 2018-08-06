@@ -3,12 +3,12 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, FormBtn } from "../../components/Form";
-import "./home.css";
+import "./home2.css";
 import { List, ListItem } from "../../components/List";
-import logo from "./stocklogo.PNG";
+import logo from "../home/stocklogo.PNG";
 import Label from 'react-bootstrap/lib/Label';
 
-class Home extends Component{
+class Home2 extends Component{
     state = {
         userName: "",
         password: "",
@@ -87,6 +87,17 @@ class Home extends Component{
     <br/>
     {/* +++++++++++++++++++++++++++++++++++++++++++ */}
     <Row>
+        <Col size="md-3 sm-1"></Col>
+        <Col size="md-6 sm-10">
+            <div className={"loginLabel"}>
+            <img src={logo} height="10%" alt=""className={"centerLogo"}></img>
+            
+            </div>
+            
+            </Col> 
+        <Col size="md-3 sm-1"></Col>
+    </Row>
+    <Row>
     <Col size="md-3 sm-12">
         {/* <div size="md-3 sm 12"> */}
         <div className={"loginLabel"}>
@@ -105,29 +116,7 @@ class Home extends Component{
         </div>
         
       </Col>
-        <Col size="md-6 sm 12">
-        <div className={"loginLabel"}>
-          <Label>Login</Label>
-        
-        </div>
-        <div className={"col-md-12 loginForm"}>
-          <img src={logo} alt=""className={"centerLogo"}></img>
-        <form>
-          <Input name="userName" placeholder="Enter Username"onChange={this.handleInputChange} />
-          <Input name="password" placeholder="Enter Password"onChange={this.handleInputChange} type="password"/>
-          <FormBtn href="/stock"
-          onClick={this.handleFormSubmit}
-          >Submit</FormBtn>
-        </form>
-        
-        <button  className="btn btn-success text-white">
-            <a className= "text-white" href ="/signup">
-            Sign Up!
-            </a>
-      </button>
-
-      </div>
-        </Col>
+       
       <div className={"loginLabel"} size="md-6 sm 12">
 
       </div>  
@@ -200,4 +189,4 @@ class Home extends Component{
         ////////////////////////component end
 }
 
-export default Home;
+export default Home2;

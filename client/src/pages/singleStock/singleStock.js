@@ -123,7 +123,7 @@ componentDidMount(){
           </Col>
 
           <Col size="md-8">
-          <h1>{sessionStorage.individual.toUpperCase()} Current Price: ${this.state.lastPrice}</h1>
+          <h1 className="text-white">{sessionStorage.individual.toUpperCase()} Current Price: ${this.state.lastPrice}</h1>
           <LineExample data={this.state.chartData}/>
           </Col>
         </Row>
