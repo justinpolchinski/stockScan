@@ -107,6 +107,8 @@ singleStockPage=(event)=>{
       .then(res =>  {
         if(res.data["Information"]){
           alert("Please Try again server is busy!");
+          setTimeout(3000);
+          this.getData();
           // {Information: "Please consider optimizing your API call frequency."}
         }
         

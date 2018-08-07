@@ -9,6 +9,7 @@ import ReactTooltip from 'react-tooltip';
 import peg from "./pegRatio";
 import theBeta from "./beta";
 import "./singlestock.css";
+import { setTimeout } from "timers";
  
 
 class Stocks extends Component {
@@ -29,30 +30,41 @@ getData = () =>{
   const ticker = this.state.ticker;
   API.individualstock(ticker)
   .then(res =>{
-    console.log(res.data);
-    const LastRefreshed = res.data["Meta Data"]["3. Last Refreshed"];
-    console.log(LastRefreshed);
-    const timeSeries = res.data["Time Series (5min)"];
-    console.log("TimeSeries %O", timeSeries);
-    let timeStamp =[];
-    let timeArr = []
-    for (let key in timeSeries){
-     // console.log(key);
-      timeStamp.push(key);
-      timeArr.push(parseFloat(timeSeries[key]["4. close"]));
+    if(res.data["Information"]){
+      alert("Please Try again server is busy!");
+      setTimeout(5000);
+     // this.getData();
+      window.location.href = "/individual/"+this.state.ticker;
+      
     }
-    this.state.lastPrice = timeArr[0];
-    this.state.chartData.labels = timeStamp.reverse();
-    this.state.chartData.datasets[0].data=timeArr.reverse();
-    this.state.chartData.datasets[0].label=sessionStorage.individual.toUpperCase();
-    console.log(timeArr);
-    sessionStorage.timeStamp = timeStamp;
-    sessionStorage.timeArr= timeArr;
-    sessionStorage.array = [1,2,3];
-    
-  });
-  this.chartSet();
+    if(!res.data["Information"]){
+      console.log("Get Data: O%" ,res.data);
+      const LastRefreshed = res.data["Meta Data"]["3. Last Refreshed"];
+      console.log(LastRefreshed);
+      const timeSeries = res.data["Time Series (5min)"];
+      console.log("TimeSeries %O", timeSeries);
+      let timeStamp =[];
+      let timeArr = []
+      for (let key in timeSeries){
+      // console.log(key);
+        timeStamp.push(key);
+        timeArr.push(parseFloat(timeSeries[key]["4. close"]));
+      }
+      this.setState({lastPrice : timeArr[0]})
+      //this.state.lastPrice = timeArr[0];
+     
+      this.state.chartData.labels = timeStamp.reverse();
+      this.state.chartData.datasets[0].data=timeArr.reverse();
+      this.state.chartData.datasets[0].label=sessionStorage.individual.toUpperCase();
+      console.log(timeArr);
+      sessionStorage.timeStamp = timeStamp;
+      sessionStorage.timeArr= timeArr;
+      sessionStorage.array = [1,2,3];
+      
+    }
   
+  this.chartSet();
+  }) 
 } 
 betaPegColor = (n) =>{
    
